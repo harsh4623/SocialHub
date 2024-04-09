@@ -48,7 +48,6 @@ const Update = ({ setOpenUpdate, user }) => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    //TODO: find a better way to get image URL
 
     let coverUrl;
     let profileUrl;
@@ -59,7 +58,7 @@ const Update = ({ setOpenUpdate, user }) => {
     setOpenUpdate(false);
     setCover(null);
     setProfile(null);
-
+  }
     return (
       <div className="update">
         <div className="wrapper">
