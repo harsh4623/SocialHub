@@ -149,7 +149,7 @@ const Update = ({ setOpenUpdate, user }) => {
         </div>
       </div>
     );
-  };
+  
 }
 
   export default Update;
