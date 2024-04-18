@@ -1,37 +1,54 @@
 import "./rightBar.scss";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+// import {useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+// import { makeRequest } from "../../axios";
+import { AuthContext } from "../../context/authContext";
+import { useContext } from "react";
+
 
 const RightBar = () => {
+
+  const [users, setUsers] = useState([]);
+  // const queryClient = useQueryClient();
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:8800/api/users");
+        const allUsers = response.data;
+        
+        // Filter out the current user
+        const filteredUsers = allUsers.filter(user => user.id !== currentUser.id);
+  
+        setUsers(filteredUsers);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+  
+    fetchUsers();
+  }, [currentUser]);
+
   return (
     <div className="rightBar">
       <div className="container">
         <div className="item">
           <span>Suggestions For You</span>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <span></span>
-            </div>
-            <div className="buttons">
+          {users.map((user) => (
+            <div key={user.id} className="user">
+              <div className="userInfo">
+                <img src={"/upload/"+user.profilePic} alt={user.username} />
+                <span>{user.username}</span>
+              </div>
+              <div className="buttons">
               <button>follow</button>
               <button>dismiss</button>
             </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <span>Jane Doe</span>
             </div>
-            <div className="buttons">
-              <button>follow</button>
-              <button>dismiss</button>
-            </div>
-          </div>
+          ))}
+         
         </div>
         <div className="item">
           <span>Latest Activities</span>
@@ -42,7 +59,7 @@ const RightBar = () => {
                 alt=""
               />
               <p>
-                <span>Jane Doe</span> changed their cover picture
+                <span>Harsh Patel</span> changed their cover picture
               </p>
             </div>
             <span>1 min ago</span>
@@ -54,7 +71,7 @@ const RightBar = () => {
                 alt=""
               />
               <p>
-                <span>Jane Doe</span> changed their cover picture
+                <span>Harsh Patel</span> changed their cover picture
               </p>
             </div>
             <span>1 min ago</span>
@@ -66,7 +83,7 @@ const RightBar = () => {
                 alt=""
               />
               <p>
-                <span>Jane Doe</span> changed their cover picture
+                <span>Harsh Patel</span> changed their cover picture
               </p>
             </div>
             <span>1 min ago</span>
@@ -78,7 +95,7 @@ const RightBar = () => {
                 alt=""
               />
               <p>
-                <span>Jane Doe</span> changed their cover picture
+                <span>Harsh Patel</span> changed their cover picture
               </p>
             </div>
             <span>1 min ago</span>
@@ -93,7 +110,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>Harsh Patel</span>
             </div>
           </div>
           <div className="user">
@@ -103,7 +120,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>new</span>
             </div>
           </div>
           <div className="user">
@@ -113,7 +130,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>Patel</span>
             </div>
           </div>
           <div className="user">
@@ -123,7 +140,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>User1</span>
             </div>
           </div>
           <div className="user">
@@ -133,7 +150,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>User2</span>
             </div>
           </div>
           <div className="user">
@@ -143,7 +160,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>User3</span>
             </div>
           </div>
           <div className="user">
@@ -153,7 +170,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>User4</span>
             </div>
           </div>
           <div className="user">
@@ -163,7 +180,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>User5</span>
             </div>
           </div>
           <div className="user">
@@ -173,7 +190,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>User6</span>
             </div>
           </div>
           <div className="user">
@@ -183,7 +200,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>User7</span>
             </div>
           </div>
           <div className="user">
@@ -193,7 +210,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Jane Doe</span>
+              <span>User8</span>
             </div>
           </div>
         </div>

@@ -40,3 +40,19 @@ export const updateUser = (req, res) => {
     );
   });
 };
+
+// New addded last time 
+
+export const getUsers = (req, res) => {
+  const q = "SELECT * FROM users";
+
+  db.query(q, (err, data) => {
+    if (err) return res.status(500).json(err);
+    // Exclude sensitive data like passwords before sending the response
+    const users = data.map((user) => {
+      const { password, ...info } = user;
+      return info;
+    });
+    return res.json(users);
+  });
+};
