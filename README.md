@@ -12,7 +12,7 @@ NodeJs, ExpressJS, JWT(Json Web Token)
 
 
 * **Database:-**
-MySQL, MongoDB
+MySQL
 
 ## Key Features
 
